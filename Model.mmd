@@ -1,0 +1,52 @@
+classDiagram
+  Canvas o-- Inscription
+  Canvas *-- Axis
+  Canvas "1" *-- "*" Inscription
+  Canvas *-- InscriptionRange
+
+  Inscription o-- Value
+  Inscription o-- Position
+
+  Value o-- TextValue
+  Value o-- ImageValue
+
+  class Canvas {
+    xAxis: Axis
+    yAxis: Axis
+    inscriptionRange: InscriptionRange
+
+    getInscriptions(): Inscription[*]
+    addInscription(Inscription): void
+    removeInscription(InscriptionId): void
+    updateInscription(InscriptionId, InscriptionUpdate): void
+  }
+
+  class InscriptionRange {
+    minX: number
+    maxX: number
+    minY: number
+    maxY: number
+  }
+
+  class Axis {
+    +min: number
+    +max: number
+  }
+
+  class Inscription {
+    +value: Value
+    +position: Position
+  }
+
+  class Position {
+    +x: number
+    +y: number
+  }
+
+  class TextValue {
+    +value: string
+  }
+
+  class ImageValue {
+    +src: string
+  }
